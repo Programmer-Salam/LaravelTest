@@ -1,59 +1,6 @@
 <div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Fast PTS' Affiliate List</title>
-    <!-- CSS files -->
-
-    <style>
-      @import url("https://rsms.me/inter/inter.css");
-      :root {
-        --tblr-font-sans-serif: "Inter Var", -apple-system, BlinkMacSystemFont,
-          San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
-      }
-      body {
-        font-feature-settings: "cv03", "cv04", "cv11";
-      }
-      .loading-indicator {
-  display: inline-block;
-  padding: 10px;
-  background-color: rgba(0, 123, 255, 0.2); /* Light blue background with some transparency */
-  border-radius: 5px;
-  color: #007bff; /* Primary blue color */
-  font-weight: bold;
-  text-align: center;
-  animation: pulse 1.5s infinite; /* Animation to create a pulsing effect */
-}
-
-/* Keyframes for pulsing animation */
-@keyframes pulse {
-  0% {
-    background-color: rgba(0, 123, 255, 0.2);
-  }
-  50% {
-    background-color: rgba(0, 123, 255, 0.5);
-  }
-  100% {
-    background-color: rgba(0, 123, 255, 0.2);
-  }
-}
-
-    </style>
-    {{-- <script src="{{asset('frontend/js/nicesellect.js')}}"></script> --}}
-<link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
-
-  </head>
   <body>
-    <script src="{{ asset('dist/js/demo-theme.min.js?1684106062')}}"></script>
     <div class="page">
       <!-- Navbar -->
       <aside
@@ -829,12 +776,12 @@
               </li>
               <li class="nav-item active dropdown">
                 <a
-                  class="nav-link dropdown-toggle"
+                  class="nav-link dropdown-toggle show"
                   href="#navbar-base"
                   data-bs-toggle="dropdown"
                   data-bs-auto-close="false"
                   role="button"
-                  aria-expanded="false"
+                  aria-expanded="true"
                 >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"
                     ><!-- Download SVG icon from http://tabler-icons.io/i/package -->
@@ -871,13 +818,13 @@
                   </span>
                   <span class="nav-link-title">Affiliate Handling</span>
                 </a>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu show" data-bs-popper="static">
                   <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                      <a class="dropdown-item" href="./affiliate-list.html">
+                      <a class="dropdown-item" href="{{ url('/') }}">
                         Affiliate List
                       </a>
-                      <a class="dropdown-item" href="./affiliate-groups.html">
+                      <a class="dropdown-item" href="{{ url('/affiliate-groups') }}">
                         Affiliate Groups
                       </a>
                     </div>
@@ -1667,7 +1614,7 @@
             <div class="mb-3 row">
               <span wire:loading class="col-md-3 offset-md-5 text-primary loading-indicator">Loading...</span>
             </div>
-            
+             
             
             @if (session('success'))
             <div class="alert alert-success">
@@ -1956,7 +1903,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($Affiliates as $Affliate)
+                @forelse ($Affiliates as $Affliate)
                 <tr>
                   <td><?php echo $x++ ?></td>
                   <td>{{ $Affliate->created_at }}</td>
@@ -1969,7 +1916,7 @@
                   </td>
                   <td data-label="comission_type">
                     <div class="text-primary fw-bold">{{ $Affliate->commission_type }}</div>
-                  </td>
+                  </td> 
                   <td data-label="comission_rate">
                     <div class="text-primary fw-bold">{{ $Affliate->commission_rate }}</div>
                   </td>
@@ -1993,7 +1940,12 @@
                   </div>
                 </td>
                 </tr>
-                  @endforeach
+                @empty
+                <tr>
+                    <td colspan="10" class="notfound">No Affiliate found !</td>
+                </tr>
+            @endforelse
+   
               </tbody>
             </table>
           </div>
@@ -2161,10 +2113,7 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core -->
-    <script src="{{ asset('dist/js/tabler.min.js?1684106062')}}" defer=""></script>
-    <script src="{{ asset('dist/js/demo.min.js?1684106062')}}" defer=""></script>
-    <script src="{{ asset('dist/js/tabler.min.js?1684106062')}}" defer=""></script>
-    <script src="{{ asset('dist/js/demo.min.js?1684106062')}}" defer=""></script>
+   
   </body>
 
 

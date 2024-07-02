@@ -9,4 +9,4 @@
         @livewire('AffiliateForm')
     </body>
 </html>
- 
+  

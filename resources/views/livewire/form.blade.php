@@ -110,13 +110,15 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <label class="form-label">Network</label>
-                            <select wire:model="network_type" class="form-select"   >
-                                <option value=""  selected="">Choose</option>
-                                <option value="Website">Website</option>
-                                <option value="Facebook">Facebook</option>
-                                <option value="Instagram">Instagram</option>
-                                <option value="Twitter">Twitter</option>
+                            <select wire:model="network_type" class="form-select">
+                                <option value="" selected>Choose</option>
+                                @forelse ($AffiliateNetworkTypes as $AffiliateNetworkType)
+                                    <option value="{{ $AffiliateNetworkType->network }}">{{ $AffiliateNetworkType->network }}</option>
+                                @empty
+                                    <option value="" disabled selected>No Network</option>
+                                @endforelse
                             </select>
+                            
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -127,7 +129,6 @@
                                 wire:model="network_link"
                                 class="form-control"
                                 placeholder="www.instagram.com/network"
-                                  
                             />
                         </div>
                     </div>
@@ -148,9 +149,9 @@
             <div class="modal-footer">
                 
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-                <div class="mb-3 row"> 
+                {{-- <div class="mb-3 row"> 
                     <span wire:loading class="col-md-3 offset-md-5 text-primary">Processing...</span>
-                  </div>
+                  </div> --}}
                 <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

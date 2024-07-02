@@ -4,6 +4,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Affiliate;
+use App\Models\AffiliateNetworkType;
 use Illuminate\Validation\ValidationException;
 
 class AffiliateForm extends Component
@@ -27,7 +28,7 @@ class AffiliateForm extends Component
         'affiliate_note' => 'nullable|string|min:10',
     ];
 
-    public function submit()
+    public function submit() 
     {
         try {
             $this->validate();
@@ -43,8 +44,6 @@ class AffiliateForm extends Component
             ]);
 
             session()->flash('success', 'Affiliate created successfully!');
-
-            // Clear form inputs if needed
             $this->reset();
         } catch (ValidationException $e) {
             $this->validationErrors = $e->errors();
@@ -55,7 +54,9 @@ class AffiliateForm extends Component
     {
         return view('livewire.affiliate-form', [
             'Affiliates' => Affiliate::latest()->get(),
-            'Users' => User::latest()->get()
+            'Users' => User::latest()->get(),
+            'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
+
         ]);
     }
 }

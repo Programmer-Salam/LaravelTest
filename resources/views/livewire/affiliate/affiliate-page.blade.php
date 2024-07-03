@@ -2173,7 +2173,10 @@
                                                 </span>
                                             </label>
                                         </div>
+                                        <center>  @error('commission_type') <span class="text-danger">Choose one of the commission types</span> @enderror</center>
+
                                     </div>
+
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="mb-3">

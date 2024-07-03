@@ -11,12 +11,16 @@ class CreateAffiliatesTable extends Migration
         Schema::create('affiliates', function (Blueprint $table) {
             $table->id();
             $table->string('players');
+            $table->string('company_id');
+            $table->string('user_id ');
             $table->string('commission_type');
             $table->decimal('commission_rate', 8, 2);
             $table->string('currency');
             $table->string('network_type');
             $table->string('network_link');
-            $table->text('affiliate_note')->nullable();
+            $table->text('note')->nullable();
+            $table->string('affiliate_link');
+
             $table->timestamps();
         });
     }

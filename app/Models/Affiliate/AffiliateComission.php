@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Affiliate;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +24,7 @@ class AffiliateComission extends Model
     protected $casts = [
         'minimum_rate' => 'integer',
         'maximum_rate' => 'integer',
-        // You might need to cast methods to arrays if you store them as JSON
+        // We might need to cast methods to arrays because i store them as JSON
         'deposit_included_methods' => 'array',
         'withdraw_included_methods' => 'array',
         'deduction_included_methods' => 'array',

@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Affiliate;
 
 use Log;
 use Livewire\Component;
-use App\Models\AffiliateComission;
-use App\Models\AffiliateNetworkType;
+use App\Models\Affiliate\AffiliateComission;
+use App\Models\Affiliate\AffiliateNetworkType;
 use Illuminate\Validation\ValidationException;
 
-class AffiliateGroupForm extends Component
+class AffiliateGroupPage extends Component
 {
-
     public $validationErrors = [];
     public $validationErrorNetwork = [];
-
 
     public $type_name = '';
     public $minimum_rate = '';
@@ -27,7 +25,7 @@ class AffiliateGroupForm extends Component
     public $deduction_included_methods = [];
 
     public $network_type = '';
-    public $domain_type = '';
+    public $domain_type = ''; 
     public $domain_link = '';
 
     protected $rulesCommission = [
@@ -50,8 +48,8 @@ class AffiliateGroupForm extends Component
     ];
 
     public function createCommissionType()
-    {
-        $this->validate($this->rulesCommission);
+    { 
+        $this->validate($this->rulesCommission);  
 
         try {
             AffiliateComission::create([
@@ -66,39 +64,44 @@ class AffiliateGroupForm extends Component
                 'deduction_rule' => $this->deduction_rule,
                 'deduction_included_methods' => $this->deduction_included_methods, 
             ]);
-
-            session()->flash('success', 'Commission type created successfully.');
+            $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Commission type created successfully.');
             $this->reset([
                 'type_name', 'minimum_rate', 'maximum_rate', 'description', 
                 'deposit_rule', 'deposit_included_methods', 'withdraw_rule', 
                 'withdraw_included_methods', 'deduction_rule', 'deduction_included_methods'
             ]);
         } catch (ValidationException $e) {
-            session()->flash('success_error', 'Commission type not created.');
+            $this->dispatch('swal', title: 'Validation Error', icon: 'error', text: 'Commission type creation unsuccessful: ' . $e->getMessage());
+            // return redirect('');
+            // return redirect()->route('');
+    
+        } catch (\Exception $e) {
+            $this->dispatch('swal', title: 'Error', icon: 'danger', text: 'Commission creation unsuccessful. An unexpected error occurred: ' . $e->getMessage());
         }
     }
 
     public function networktype()
     {
         $this->validate($this->rulesNetwork);
-    
+
         try {
             AffiliateNetworkType::create([
                 'network' => $this->network_type,
                 'network_domain_type' => $this->domain_type,
                 'network_domain' => $this->domain_link,
             ]);
-            session()->flash('success_network', 'Network type created successfully.');
+            $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Network created successfully.');
             $this->reset(['network_type', 'domain_type', 'domain_link']);
         } catch (ValidationException $e) {
-            session()->flash('success_network_fail', 'Network type not created.');
+            $this->dispatch('swal', title: 'Validation Error', icon: 'error', text: 'Network creation unsuccessful: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            $this->dispatch('swal', title: 'Error', icon: 'danger', text: 'Network creation unsuccessful. An unexpected error occurred: ' . $e->getMessage());
         }
     }
-    
 
     public function render()
     {
-        return view('livewire.affiliate-group-form', [
+        return view('livewire.affiliate.affiliate-group-page', [
             'AffiliateComissions' => AffiliateComission::latest()->get(), 
             'AffiliateNetworks' => AffiliateNetworkType::latest()->get(),
         ]);

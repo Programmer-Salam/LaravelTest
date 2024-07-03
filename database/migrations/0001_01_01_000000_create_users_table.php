@@ -13,15 +13,50 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            // unique id for each user 8 digit
+            $table->string('user_id')->unique();
+            // user_tag
+            $table->string('user_tag')->nullable();
+            // merchant and submerchant tables
+            $table->unsignedBigInteger('merchant_id')->nullable()->constrained('merchants')->onDelete('cascade');
+            $table->unsignedBigInteger('sub_merchant_id')->nullable()->constrained('sub_merchants')->onDelete('cascade');
+            // 
+            $table->string('name')->nullable();
+            $table->string('currency')->nullable();
+            // an example of uuid for each the company_id = hkjshd-ksjdh-ksjdh-ksjdh
+            $table->string('company_id')->nullable(); // TODO: THIS IS VERY IMPORTANT (THERE ARE MANY COMPANIES CREARED, EACH COMPANY HAS ITS OWN DETAILS) - in this case when creating the affiliate, the affiliate will be created under the company so keep this in mind and track the company_id in the affliate table
+                        $table->string('gender')->nullable();
+            $table->string('country')->nullable();
+            $table->string('identity_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->boolean('registration_completed')->default(false);
             $table->string('email')->unique();
+            $table->string('user_name')->unique()->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('middle_name')->nullable();
+            $table->string('operator_group')->nullable();
+            $table->string('title')->nullable(); 
+            $table->string('note')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('domain')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // player type
+            $table->string('type')->nullable();
+            // is_locked
+            $table->boolean('is_locked')->default(false);
+            // merchant_token
+            $table->string('merchant_token')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
+  Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -40,7 +75,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+      public function down(): void
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');

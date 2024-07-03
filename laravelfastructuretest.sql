@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2024 at 07:00 PM
+-- Generation Time: Jul 03, 2024 at 04:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,12 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `affiliates` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `players` varchar(255) NOT NULL,
+  `company_id` varchar(100) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
   `commission_type` varchar(255) NOT NULL,
   `commission_rate` decimal(8,2) NOT NULL,
   `currency` varchar(255) NOT NULL,
   `network_type` varchar(255) NOT NULL,
   `network_link` varchar(255) NOT NULL,
-  `affiliate_note` text DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `affiliate_link` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -76,6 +79,13 @@ CREATE TABLE `affiliate_network_types` (
   `network_domain_type` varchar(255) NOT NULL,
   `network_domain` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `affiliate_network_types`
+--
+
+INSERT INTO `affiliate_network_types` (`id`, `created_at`, `updated_at`, `network`, `network_domain_type`, `network_domain`) VALUES
+(1, '2024-07-03 11:10:55', '2024-07-03 11:10:55', 'Facebook', 'include', 'https://facebook.com');
 
 -- --------------------------------------------------------
 
@@ -169,13 +179,12 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_07_01_114139_create_affiliates_table', 2),
-(7, '2024_07_02_125545_create_affiliate_groups_table', 3),
-(8, '2024_07_02_132557_create_affiliate_network_types_table', 3),
-(9, '2024_07_02_141338_create_affiliate_comissions_table', 4);
+(7, '0001_01_01_000000_create_users_table', 1),
+(8, '0001_01_01_000001_create_cache_table', 1),
+(9, '0001_01_01_000002_create_jobs_table', 1),
+(10, '2024_07_01_114139_create_affiliates_table', 1),
+(11, '2024_07_02_132557_create_affiliate_network_types_table', 1),
+(12, '2024_07_02_141338_create_affiliate_comissions_table', 1);
 
 -- --------------------------------------------------------
 
@@ -209,9 +218,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2wwzRHzHNcZPNhqqZ9XY88wAa1GQ85GNuQpNMRLW', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib2JSblE4bEEwajdIQm9xbTJEMW9kRjZuM0VmUERmTWdSZWNkZXlDdSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjE6e2k6MDtzOjE1OiJzdWNjZXNzX25ldHdvcmsiO31zOjM6Im5ldyI7YTowOnt9fX0=', 1719938754),
-('dqpzoiFx37uIYTws9AGt3hGyU5C12OyWqxJTU8Fo', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieXo4Y0pUaG5tdDI4TGxuZWM4SE0yVlFBekRYQU1mQlhBYmpHWXRkbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZmZpbGlhdGUtZ3JvdXBzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1719939262),
-('rBZdKR05firVcP3fpYqsVKzgk7P49DXL9QuRd6ff', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiakcwNkt1OWwyOU02NmZySUdFZDlOemtxZ2VlYnd4Z2VtZWZ6ODNCbCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZmZpbGlhdGUtZ3JvdXBzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1719931435);
+('LYcWoHveqEUK2gTcOHJxhn9xjiOGgx03liH52o1R', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic3BCQU04ekVURmVPYjlOVmxPN0tsQ0dENHBzVEZ0dDBWTmVFT2RydSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hZmZpbGlhdGUtZ3JvdXBzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1720018093);
 
 -- --------------------------------------------------------
 
@@ -254,15 +261,15 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_id`, `user_tag`, `merchant_id`, `sub_merchant_id`, `name`, `currency`, `company_id`, `gender`, `country`, `identity_number`, `city`, `address`, `phone_number`, `postal_code`, `registration_completed`, `email`, `user_name`, `first_name`, `last_name`, `middle_name`, `operator_group`, `title`, `note`, `birthday`, `domain`, `email_verified_at`, `password`, `type`, `is_locked`, `merchant_token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '50426966', '7546', NULL, NULL, 'Owner', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'owner@owner.com', NULL, 'Vince01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$rf1pfi7r9UiBU7gz.qOOy.T0YmVoScO3kf65mWgVd.Khw5sIFl1k6', NULL, 0, NULL, NULL, '2024-06-28 07:28:49', '2024-06-28 07:28:49'),
-(2, '11217330', '7546', NULL, NULL, 'Financial Admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'financial@admin.com', 'DefaultMerchantAdmin', 'Vince02', NULL, NULL, 'Financial', NULL, NULL, NULL, NULL, NULL, '$2y$10$nePP7xPVwpeK1xn0ifFjxuTAK908X8qBmOcANnMmFLFuovsq7Uhue', NULL, 0, 'gDfDAEtrpjiSR7FJCTMAgcksUwB7hiJqobmBxgQu', NULL, '2024-06-28 07:28:49', '2024-06-28 07:28:49');
+(1, '50426966', '7546', NULL, NULL, 'Owner', NULL, '1234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'owner@owner.com', NULL, 'Vince', '01', '001', NULL, NULL, NULL, NULL, NULL, NULL, '$2y$10$rf1pfi7r9UiBU7gz.qOOy.T0YmVoScO3kf65mWgVd.Khw5sIFl1k6', NULL, 0, NULL, NULL, '2024-06-28 06:28:49', '2024-06-28 06:28:49'),
+(2, '11217330', '7546', NULL, NULL, 'Financial Admin', NULL, '1234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'financial@admin.com', 'DefaultMerchantAdmin', 'Vince02', '002', '003', 'Financial', NULL, NULL, NULL, NULL, NULL, '$2y$10$nePP7xPVwpeK1xn0ifFjxuTAK908X8qBmOcANnMmFLFuovsq7Uhue', NULL, 0, 'gDfDAEtrpjiSR7FJCTMAgcksUwB7hiJqobmBxgQu', NULL, '2024-06-28 06:28:49', '2024-06-28 06:28:49');
 
 --
 -- Indexes for dumped tables
@@ -367,7 +374,7 @@ ALTER TABLE `affiliate_comissions`
 -- AUTO_INCREMENT for table `affiliate_network_types`
 --
 ALTER TABLE `affiliate_network_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -385,7 +392,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

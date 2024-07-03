@@ -4191,7 +4191,7 @@ textarea.form-control.is-invalid {
   --tblr-btn-hover-border-color: transparent;
   --tblr-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
   --tblr-btn-disabled-opacity: 0.4;
-  --tblr-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--tblr-btn-focus-shadow-rgb), .5);
+  /* --tblr-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--tblr-btn-focus-shadow-rgb), .5); */
   display: inline-block;
   padding: var(--tblr-btn-padding-y) var(--tblr-btn-padding-x);
   font-family: var(--tblr-btn-font-family);
@@ -20838,7 +20838,7 @@ a.badge {
 .btn-primary {
   --tblr-btn-border-color: transparent;
   --tblr-btn-hover-border-color: transparent;
-  --tblr-btn-active-border-color: transparent;
+  /* --tblr-btn-active-border-color: transparent; */
   --tblr-btn-color: var(--tblr-primary-fg);
   --tblr-btn-bg: var(--tblr-primary);
   --tblr-btn-hover-color: var(--tblr-primary-fg);

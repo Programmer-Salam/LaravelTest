@@ -11,7 +11,6 @@
                     <div class="col-lg-12">
                         <div class="mb-3">
                             <label class="form-label">Select Players</label>
-                            {{-- @error('players') <span class="text-danger">{{ $message }}</span> @enderror --}}
                             <select wire:model="players" class="form-control"   >
                                 <option value="" selected="">Choose</option>
                                 @foreach ($Users as $User)
@@ -22,6 +21,8 @@
                 </option>
                                 @endforeach 
                             </select>
+                            @error('players') <span class="text-danger">{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                                 value="revenue" 
                                 class="form-selectgroup-input"
                             />
-                            @error('commission_type') <span class="text-danger">{{ $message }}</span> @enderror
+                       
                             <span class="form-selectgroup-label d-flex align-items-center p-3">
                                 <span class="me-3">
                                     <span class="form-selectgroup-check"></span>
@@ -60,7 +61,7 @@
                                 value="deposit"
                                 class="form-selectgroup-input"
                             />
-                            @error('commission_type') <span class="text-danger">{{ $message }}</span> @enderror
+                       
                             <span class="form-selectgroup-label d-flex align-items-center p-3">
                                 <span class="me-3">
                                     <span class="form-selectgroup-check"></span>
@@ -86,6 +87,8 @@
                                     value="15"
                                     autocomplete="off"
                                 />
+                            @error('commission_rate') <span class="text-danger">{{ $message }}</span> @enderror
+
                             </div>
                         </div>
                     </div>
@@ -99,6 +102,8 @@
                                 <option value="STG">STG</option>
                                 <option value="TRY">TRY</option>
                             </select>
+                            @error('selected') <span class="text-danger">{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                 </div>
@@ -110,7 +115,7 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <label class="form-label">Network</label>
-                            <select wire:model="network_type" class="form-select">
+                            <select wire:model="network_type" class="form-select"> 
                                 <option value="" selected>Choose</option>
                                 @forelse ($AffiliateNetworkTypes as $AffiliateNetworkType)
                                     <option value="{{ $AffiliateNetworkType->network }}">{{ $AffiliateNetworkType->network }}</option>
@@ -118,6 +123,7 @@
                                     <option value="" disabled selected>No Network</option>
                                 @endforelse
                             </select>
+                            @error('network_type') <span class="text-danger">{{ $message }}</span> @enderror
                             
                         </div>
                     </div>
@@ -128,8 +134,10 @@
                                 type="text"
                                 wire:model="network_link"
                                 class="form-control"
-                                placeholder="www.instagram.com/network"
+                                placeholder="https://name.com"
                             />
+                            @error('network_link') <span class="text-danger">{{ $message }}</span> @enderror
+
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -141,6 +149,7 @@
                                 rows="3"
                                 placeholder="Note must have at least 10 characters"
                             ></textarea>
+                            @error('affiliate_note') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                 </div>
@@ -149,9 +158,7 @@
             <div class="modal-footer">
                 
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-                {{-- <div class="mb-3 row"> 
-                    <span wire:loading class="col-md-3 offset-md-5 text-primary">Processing...</span>
-                  </div> --}}
+
                 <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

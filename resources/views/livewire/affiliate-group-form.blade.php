@@ -1614,12 +1614,14 @@
                  
                 <div>
                   @if (session('success'))
-                  <div class="alert alert-success">
-                      {{ session('success') }}
-                  </div>
+                  <div class="alert alert-success alert-dismissable fade show">
+                    <button class="close" data-dismiss="alert" aria-label="Close">×</button>
+                    {{session('success')}}
+                </div>
               @endif
               @if (session('success_error'))
-              <div class="alert alert-danger">
+              <div class="alert alert-danger alert-dismissable fade show">
+                <button class="close" data-dismiss="alert" aria-label="Close">×</button>
                   {{ session('success_error') }}
               </div>
           @endif 
@@ -1647,7 +1649,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="notfound">No commission found !</td>
+                            <td colspan="4" class="notfound">No Records found !</td>
                         </tr>
                     @endforelse
                       </tbody>
@@ -1705,11 +1707,12 @@
                 <div class="mb-3 row">
                   <span wire:loading wire:target="networktype" class="col-md-3 offset-md-5 text-primary loading-indicator">Loading...</span>
                 </div>
-                
+          
                 @if (session('success_network'))
-                <div class="alert alert-success">
-                    {{ session('success_network') }}
-                </div>
+                <div class="alert alert-success alert-dismissable fade show">
+                  <button class="close" data-dismiss="alert" aria-label="Close">×</button>
+                  {{ session('success_network') }}
+              </div>       
             @endif
             
             @if (session('success_network_fail'))
@@ -1738,7 +1741,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="notfound">No Network Type Found !</td>
+                            <td colspan="4" class="notfound">No Records Found !</td>
                         </tr>
                     @endforelse
                       </tbody>

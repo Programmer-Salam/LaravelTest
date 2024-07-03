@@ -11,7 +11,7 @@ class AffiliateForm extends Component
 {   
     public $players;
     public $commission_type;
-    public $commission_rate = 15;
+    public $commission_rate;
     public $currency;
     public $network_type;
     public $network_link;
@@ -21,7 +21,7 @@ class AffiliateForm extends Component
     protected $rules = [
         'players' => 'required|string',
         'commission_type' => 'required|string',
-        'commission_rate' => 'required|numeric',
+        'commission_rate' => 'required|numeric|min:1|max:20',
         'currency' => 'required|string',
         'network_type' => 'required|string',
         'network_link' => 'required|url',
@@ -43,7 +43,7 @@ class AffiliateForm extends Component
                 'affiliate_note' => $this->affiliate_note,
             ]);
 
-            session()->flash('success', 'Affiliate created successfully!');
+            session()->flash('success', 'Affiliate created successfully!!');
             $this->reset();
         } catch (ValidationException $e) {
             $this->validationErrors = $e->errors();
@@ -56,7 +56,6 @@ class AffiliateForm extends Component
             'Affiliates' => Affiliate::latest()->get(),
             'Users' => User::latest()->get(),
             'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
-
         ]);
     }
 }

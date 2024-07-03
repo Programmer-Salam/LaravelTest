@@ -11,12 +11,8 @@
                     <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Commission Name</label>
-                            <select class="form-select" wire:model="type_name">
-                                <option value="" selected>Choose</option>
-                                <option value="Deposit">Deposit</option>
-                                <option value="Revenue">Revenue</option>
-                            </select>
-                            @error('type_name') <span class="text-danger">{{ $message }}</span> @enderror
+                            <input type="text" class="form-control" wire:model="type_name" autocomplete="off" />
+                            @error('type_name') <span class="text-danger">{{ $message }}</span> @enderror 
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -24,7 +20,7 @@
                             <label class="form-label">Minimum rate</label>
                             <div class="input-group input-group-flat">
                                 <span class="input-group-text"> % </span>
-                                <input type="text" class="form-control ps-0" wire:model="minimum_rate" autocomplete="off" />
+                                <input type="text" class="form-control ps-0" wire:model="minimum_rate" autocomplete="off" placeholder="1 - 20" />
                             </div>
                             @error('minimum_rate') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
@@ -34,7 +30,7 @@
                             <label class="form-label">Maximum rate</label>
                             <div class="input-group input-group-flat">
                                 <span class="input-group-text"> % </span>
-                                <input type="text" class="form-control ps-0" wire:model="maximum_rate" autocomplete="off" />
+                                <input type="text" class="form-control ps-0" wire:model="maximum_rate" autocomplete="off" placeholder="1 - 20" />
                             </div>
                             @error('maximum_rate') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>

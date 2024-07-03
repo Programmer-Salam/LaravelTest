@@ -99,7 +99,7 @@ class AffiliateGroupForm extends Component
     public function render()
     {
         return view('livewire.affiliate-group-form', [
-            'AffiliateComissions' => AffiliateComission::latest()->get(),
+            'AffiliateComissions' => AffiliateComission::latest()->get(), 
             'AffiliateNetworks' => AffiliateNetworkType::latest()->get(),
         ]);
     }

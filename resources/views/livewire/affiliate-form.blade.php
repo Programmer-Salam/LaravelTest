@@ -1,6 +1,5 @@
 <div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
-  <body>
     <div class="page">
       <!-- Navbar -->
       <aside
@@ -1614,13 +1613,12 @@
             <div class="mb-3 row">
               <span wire:loading class="col-md-3 offset-md-5 text-primary loading-indicator">Loading...</span>
             </div>
-             
-            
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
+              @if (session('success'))
+              <div class="alert alert-success alert-dismissable fade show">
+                <button class="close" data-dismiss="alert" aria-label="Close">×</button>
+                {{session('success')}}
             </div>
-        @endif
+          @endif
         @if ($validationErrors)
         <div class="alert alert-danger">
             <ul>
@@ -1632,6 +1630,7 @@
             </ul>
         </div>
     @endif
+
             <br />
             <div class="col-12">
               <div class="row row-cards">
@@ -1942,7 +1941,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="10" class="notfound">No Affiliate found !</td>
+                    <td colspan="10" class="notfound">No Record found !</td>
                 </tr>
             @endforelse
    
@@ -2111,10 +2110,7 @@
 
     @include('livewire.form')
     </div>
-    <!-- Libs JS -->
-    <!-- Tabler Core -->
    
-  </body>
 
 
 </div>

@@ -41,8 +41,8 @@
                                     type="text"
                                   wire:model="domain_link"
                                     class="form-control"
+                placeholder="http://name.com/"
                                     autocomplete="off"
-                                    placeholder="http://name.com/"
                                 />
                             @error('domain_link') <span class="text-danger">{{ $message }}</span> @enderror
 

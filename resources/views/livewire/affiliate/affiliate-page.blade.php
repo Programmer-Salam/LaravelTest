@@ -2208,7 +2208,7 @@
                                                     <option value="STG">STG</option>
                                                     <option value="TRY">TRY</option>
                                                 </select>
-                                                @error('selected') <span class="text-danger">{{ $message }}</span> @enderror
+                                                @error('currency') <span class="text-danger">{{ $message }}</span> @enderror
                     
                                             </div>
                                         </div>
@@ -2296,31 +2296,11 @@
                     </form>
       
      </div>
-       
-    
-    
+
     </div>
 
-   <script>
-    document.addEventListener('console-error', event => {
-    console.error(event.detail.message);
-});
-
-   </script>
     @livewireScripts
-    <script>
-      document.addEventListener('livewire:load', function () {
-          Livewire.on('errorOccurred', errors => {
-              console.log('Validation errors:', errors);
-              if (errors.players || error.commission_rate || error.selected || error.network_type || error.network_link || error.affiliate_note) {
-                  console.error('errrosss');
-              }
-              // if (errors.email) {
-              //     console.error('Email error:', errors.email);
-              // }
-          });
-      });
-  </script>
+ 
 <script>
     Livewire.on('swal', function(data) {
         Swal.fire({

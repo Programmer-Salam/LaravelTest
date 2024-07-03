@@ -2171,6 +2171,7 @@
                                                         <span class="d-block text-muted">From the deposit made by your affiliate members. Merchant commissions will be deducted from the affiliate balance.</span>
                                                     </span>
                                                 </span>
+                                                
                                             </label>
                                         </div>
                                         <center>  @error('commission_type') <span class="text-danger">Choose one of the commission types</span> @enderror</center>

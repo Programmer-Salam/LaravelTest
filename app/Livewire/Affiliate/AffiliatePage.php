@@ -62,20 +62,24 @@ public function submit()
             'note' => $this->affiliate_note,
             'affiliate_link' => $affiliate_network_links->network_domain
         ]);
-
         $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Affiliate Created Successfully');
+        $this->dispatch('close-modal');
         $this->reset();
     } catch (ValidationException $e) {
-        $this->dispatch('swal', title: 'Error', icon: 'error', text: 'Affiliate Creation Unsuccessful.');
+        return;
     } catch (\Exception $e) {
-        Log::error('Affiliate Creation Error: ' . $e->getMessage(), [
-            'exception' => $e,
-            'trace' => $e->getTraceAsString()
-        ]);
         $this->dispatch('swal', title: 'Error', icon: 'error', text: 'Affiliate Creation Unsuccessful. An unexpected error occurred.');
     }
 }
-    public function render()
+ 
+
+
+
+
+
+
+
+public function render()
     {
         return view('livewire.affiliate.affiliate-page', [
             'Affiliates' => Affiliate::latest()->get(),

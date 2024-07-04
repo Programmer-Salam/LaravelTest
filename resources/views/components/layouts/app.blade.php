@@ -70,6 +70,35 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" defer=""></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer=""></script>
 
+<script>
+
+  Livewire.on('swal', function(data) {
+      Swal.fire({
+          title: data.title || 'Alert',
+          text: data.text || '',
+          icon: data.icon || 'info',
+          confirm: 'OK',
+  
+      });
+  });
+
+Livewire.on('close-modal', () => 
+{
+  $('#modal-report').remove();
+  $('.modal-backdrop').remove();
+
+}
+); 
+
+Livewire.on('close-modal2', () => 
+{
+  $('#modal-report2').remove();
+  $('.modal-backdrop').remove();
+
+}
+); 
+</script>
+
 </body>
 
 </html>

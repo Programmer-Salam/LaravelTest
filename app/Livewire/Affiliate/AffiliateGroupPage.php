@@ -65,16 +65,14 @@ class AffiliateGroupPage extends Component
                 'deduction_included_methods' => $this->deduction_included_methods, 
             ]);
             $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Commission type created successfully.');
+            $this->dispatch('close-modal');
             $this->reset([
                 'type_name', 'minimum_rate', 'maximum_rate', 'description', 
                 'deposit_rule', 'deposit_included_methods', 'withdraw_rule', 
                 'withdraw_included_methods', 'deduction_rule', 'deduction_included_methods'
             ]);
         } catch (ValidationException $e) {
-            $this->dispatch('swal', title: 'Validation Error', icon: 'error', text: 'Commission type creation unsuccessful: ' . $e->getMessage());
-            // return redirect('');
-            // return redirect()->route('');
-    
+          return;
         } catch (\Exception $e) {
             $this->dispatch('swal', title: 'Error', icon: 'danger', text: 'Commission creation unsuccessful. An unexpected error occurred: ' . $e->getMessage());
         }
@@ -91,9 +89,10 @@ class AffiliateGroupPage extends Component
                 'network_domain' => $this->domain_link,
             ]);
             $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Network created successfully.');
+            $this->dispatch('close-modal2');
             $this->reset(['network_type', 'domain_type', 'domain_link']);
         } catch (ValidationException $e) {
-            $this->dispatch('swal', title: 'Validation Error', icon: 'error', text: 'Network creation unsuccessful: ' . $e->getMessage());
+            return;
         } catch (\Exception $e) {
             $this->dispatch('swal', title: 'Error', icon: 'danger', text: 'Network creation unsuccessful. An unexpected error occurred: ' . $e->getMessage());
         }

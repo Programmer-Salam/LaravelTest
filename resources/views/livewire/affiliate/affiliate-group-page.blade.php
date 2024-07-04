@@ -1610,10 +1610,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="mb-3 row">
-                  <span wire:loading  class="col-md-3 offset-md-5 text-primary loading-indicator">Loading...</span>
-                </div> 
-            
+    
             
                 <br />
                 <div class="col-md-12 col-lg-12 mt-2">
@@ -1875,8 +1872,8 @@
           class="modal modal-blur fade"
           id="modal-report"
           tabindex="-1"
-          style="display: none"
           aria-hidden="true"
+          wire:ignore.self
         >
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -1929,7 +1926,7 @@
                               <div class="mb-3">
                                   <label class="form-label">Deposit rule</label>
                                   <select class="form-select" wire:model="deposit_rule">
-                                      <option value="" selected>Choose</option>
+                                      <option value="" disabled selected>Choose</option>
                                       <option value="1">Include</option>
                                       <option value="2">Exclude</option>
                                   </select>
@@ -1952,7 +1949,7 @@
                               <div class="mb-3">
                                   <label class="form-label">Withdraw rule</label>
                                   <select class="form-select" wire:model="withdraw_rule">
-                                      <option value="" selected>Choose</option>
+                                      <option value="" disabled selected>Choose</option>
                                       <option value="1">Include</option>
                                       <option value="2">Exclude</option>
                                   </select>
@@ -1975,7 +1972,7 @@
                               <div class="mb-3">
                                   <label class="form-label">Deduction rule</label>
                                   <select class="form-select" wire:model="deduction_rule">
-                                      <option value="" selected>Choose</option>
+                                      <option value="" disabled selected>Choose</option>
                                       <option value="1">Include</option>
                                       <option value="2">Exclude</option>
                                   </select>
@@ -1998,20 +1995,23 @@
                       </div>
       
                       <div class="modal-footer">
-                          <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-                          <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                  <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"></path>
-                                  <path d="M11.683 12.317l5.759 -5.759"></path>
-                                  <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                                  <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                                  <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                                  <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"></path>
-                              </svg>
-                              Create type
-                          </button>
-                      </div>
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
+                        <div class="mb-3 row">
+                            <span wire:loading class="col-md-3 offset-md-5 text-primary">Loading...</span>
+                        </div> 
+                        <button type="submit" class="btn btn-primary ms-auto" wire:loading.attr="disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"></path>
+                                <path d="M11.683 12.317l5.759 -5.759"></path>
+                                <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                                <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                                <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                                <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"></path>
+                            </svg>
+                            Create type
+                        </button>
+                    </div>
                   </form>
               </div>
           </div>
@@ -2022,8 +2022,8 @@
   class="modal modal-blur fade"
   id="modal-report2"
   tabindex="-1"
-  style="display: none"
   aria-hidden="true"
+  wire:ignore.self
 >
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
@@ -2040,7 +2040,7 @@
                           <label class="form-label">Network name</label>
                           <input
                                   type="text"
-                                wire:model="network_type"
+                                 wire:model="network_type"
                                   class="form-control"
                                   autocomplete="off"
                               /> 
@@ -2068,7 +2068,7 @@
                                   type="text"
                                 wire:model="domain_link"
                                   class="form-control"
-              placeholder="http://name.com/" 
+                                   placeholder="http://name.com/" 
                                   autocomplete="off"
                               />
                           @error('domain_link') <span class="text-danger">{{ $message }}</span> @enderror
@@ -2078,22 +2078,24 @@
               </div>
 
             
-          <div class="modal-footer">     
-              <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
-              
-              <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"></path>
-                      <path d="M11.683 12.317l5.759 -5.759"></path>
-                      <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                      <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                      <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
-                      <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"></path>
-                  </svg>
-                  Create Network
-              </button>  
-          </div>
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
+                <div class="mb-3 row">
+                    <span wire:loading class="col-md-3 offset-md-5 text-primary">Loading...</span>
+                </div> 
+                <button type="submit" class="btn btn-primary ms-auto" wire:loading.attr="disabled">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-affiliate" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M5.931 6.936l1.275 4.249m5.607 5.609l4.251 1.275"></path>
+                        <path d="M11.683 12.317l5.759 -5.759"></path>
+                        <path d="M5.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                        <path d="M18.5 5.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                        <path d="M18.5 18.5m-1.5 0a1.5 1.5 0 1 0 3 0a1.5 1.5 0 1 0 -3 0"></path>
+                        <path d="M8.5 15.5m-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0 -9 0"></path>
+                    </svg>
+                    Create Network
+                </button>
+            </div>
           </form>
       </div>
   </div>
@@ -2102,14 +2104,5 @@
 </div>
 </div>
 @livewireScripts
-<script>
-    Livewire.on('swal', function(data) {
-        Swal.fire({
-            title: data.title || 'Alert',
-            text: data.text || '',
-            icon: data.icon || 'info',
-            confirmButtonText: 'OK',
-        });
-    });
-</script>
+
 </div>

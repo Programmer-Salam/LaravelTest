@@ -2296,9 +2296,7 @@
     </div>
 
     @livewireScripts
-<<<<<<< HEAD
-=======
- 
+
 <script>
     Livewire.on('swal', function(data) {
         Swal.fire({
@@ -2309,5 +2307,5 @@
         });
     });
 </script>
->>>>>>> f367242ec471df35164f44a140d406980a59ec73
+
 </div>

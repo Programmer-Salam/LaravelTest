@@ -14,12 +14,12 @@ class AffiliatePage extends Component
     public $validationErrors = [];
 
     public $players  = '';
-public $commission_type = '';
-public $commission_rate = '';
-public $currency = '';
-public $network_type = '';
-public $network_link = '';
-public $affiliate_note = '';
+    public $commission_type = 'revenue';
+    public $commission_rate = '';
+    public $currency = '';
+    public $network_type = '';
+    public $network_link = '';
+    public $affiliate_note = '';
 
 protected $rules = [
     'players' => 'required|string',
@@ -27,8 +27,8 @@ protected $rules = [
     'commission_rate' => 'required|numeric|min:1|max:20',
     'currency' => 'required|string',
     'network_type' => 'required|string',
-    'network_link' => 'required|url',
-    'affiliate_note' => 'nullable|string|min:10',
+    'network_link' => 'required',
+    'affiliate_note' => 'nullable|string|min:10', 
 ];
 
 public function submit()
@@ -37,18 +37,22 @@ public function submit()
 
     try {
 
-        $selectedValue = $this->network_type;
-        $partss = explode('|', $selectedValue);
-        $network_name = $partss[0];
-        $network_affiliate_link = $partss[1];
+        $randomNumber = rand(100000, 999999); 
 
-        $fullName = trim($this->players);
-        $normalizedFullName = preg_replace('/\s+/', ' ', $fullName);
-        $nameParts = explode(' ', $normalizedFullName);
-        $part = $nameParts[0];
+        $network_id = $this->network_type;
+        $affiliate_network = AffiliateNetworkType::findOrFail($network_id);
 
-        $player_info = DB::table('users')->where('first_name', '=', $part)->first();
-        $affiliate_network_links = AffiliateNetworkType::where('network_domain', '=', $network_affiliate_link)->first();
+        $player_id = $this->players;
+        $player_info = User::findOrFail($player_id);
+
+        $network_link = $this->network_link;
+        $existing_affiliate_network = Affiliate::where('network_link', $network_link)->first(); // I think we have to validate that if the link is already used by the login user but we didn't have that for now
+
+        if ($existing_affiliate_network) {
+            $this->addError('network_link', 'This network link already exists.');
+            // $this->addError('network_link', 'This network link already exists for you!');
+            return;
+        }
 
         Affiliate::create([
             'players' => $this->players,
@@ -57,27 +61,27 @@ public function submit()
             'commission_type' => $this->commission_type,
             'commission_rate' => $this->commission_rate,
             'currency' => $this->currency,
-            'network_type' => $network_name,
+            'network_type' => $affiliate_network->network,
             'network_link' => $this->network_link,
             'note' => $this->affiliate_note,
-            'affiliate_link' => $affiliate_network_links->network_domain
+            'affiliate_link' => $affiliate_network->network_domain . "/affiliate?btag=" . $randomNumber,
         ]);
-        $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Affiliate Created Successfully');
-        $this->dispatch('close-modal');
         $this->reset();
+        // $this->dispatch('close-modal');
+        $this->handleCloseModal();
+        $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Affiliate created successfully');
+        // $this->handleCloseModal();
     } catch (ValidationException $e) {
         return;
     } catch (\Exception $e) {
         $this->dispatch('swal', title: 'Error', icon: 'error', text: 'Affiliate Creation Unsuccessful. An unexpected error occurred.');
     }
 }
- 
 
-
-
-
-
-
+public function handleCloseModal()
+    {
+        $this->dispatch('close-modal');
+    }
 
 public function render()
     {

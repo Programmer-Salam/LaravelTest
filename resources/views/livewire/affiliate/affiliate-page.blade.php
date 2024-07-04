@@ -2093,7 +2093,7 @@
           </div>
         </div>
         <div
-          class="modalmodal-blur  fade"
+          class="modal modal-blur  fade"
           id="modal-report"
           tabindex="-1"
           aria-hidden="true"
@@ -2116,15 +2116,12 @@
                                                 <select wire:model="players" class="form-control"   >
                                                     <option value="" disabled selected="">Choose</option>
                                                     @foreach ($Users as $User)
-                                    <option value="
-                                        {{ trim(implode(' ', [$User->first_name, $User->last_name, $User->middle_name])) }}
-                                    ">
+                                     <option value="{{ $User->id }}">
                                         {{ trim(implode(' ', [$User->first_name, $User->last_name, $User->middle_name])) }}
                                     </option>
                                                     @endforeach 
                                                 </select>
                                                 @error('players') <span class="text-danger">{{ $message }}</span> @enderror
-                    
                                             </div>
                                         </div>
                                     </div>
@@ -2133,14 +2130,14 @@
                                 <div class="modal-body">
                                     <label class="form-label">Commission type</label>
                                     <div class="form-selectgroup-boxes row mb-3">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6"> 
                                             <label class="form-selectgroup-item">
                                                 <input
                                                     type="radio"
-                                                    name="commission_type"
                                                     wire:model="commission_type"
                                                     value="revenue" 
                                                     class="form-selectgroup-input"
+                                                    checked=""
                                                 />
                                           
                                                 <span class="form-selectgroup-label d-flex align-items-center p-3">
@@ -2158,7 +2155,6 @@
                                             <label class="form-selectgroup-item">
                                                 <input
                                                     type="radio"
-                                                    name="commission_type"
                                                     wire:model="commission_type"
                                                     value="deposit"
                                                     class="form-selectgroup-input"
@@ -2227,10 +2223,9 @@
                                                     <option value="" disabled selected>Choose</option>
                                                     
                                                     @forelse ($AffiliateNetworkTypes as $AffiliateNetworkType)
-                                                    <option value="{{ $AffiliateNetworkType->network }}|{{ $AffiliateNetworkType->network_domain }}">
+                                                    <option value="{{ $AffiliateNetworkType->id }}">
                                                       {{ $AffiliateNetworkType->network }}
                                                   </option>
-                        
                                                     @empty
                                                         <option value="" disabled selected>No Network</option>
                                                     @endforelse
@@ -2243,7 +2238,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Network Link</label>
                                                 <input
-                                                    type="text"
+                                                    type="url"
                                                     wire:model="network_link"
                                                     class="form-control"
                                                     placeholder="https://name.com"
@@ -2296,18 +2291,4 @@
     </div>
 
     @livewireScripts
-<<<<<<< HEAD
-=======
- 
-<script>
-    Livewire.on('swal', function(data) {
-        Swal.fire({
-            title: data.title || 'Alert',
-            text: data.text || '',
-            icon: data.icon || 'info',
-            confirmButtonText: 'OK',
-        });
-    });
-</script>
->>>>>>> f367242ec471df35164f44a140d406980a59ec73
 </div>

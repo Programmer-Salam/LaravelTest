@@ -44,7 +44,7 @@ class AffiliateGroupPage extends Component
     protected $rulesNetwork = [
         'network_type' => 'required|string',
         'domain_type' => 'required|string',
-        'domain_link' => 'required|url',
+        'domain_link' => 'required',
     ];
 
     public function createCommissionType()
@@ -65,7 +65,8 @@ class AffiliateGroupPage extends Component
                 'deduction_included_methods' => $this->deduction_included_methods, 
             ]);
             $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Commission type created successfully.');
-            $this->dispatch('close-modal');
+            // $this->dispatch('close-modal');
+        $this->handleCloseModal();
             $this->reset([
                 'type_name', 'minimum_rate', 'maximum_rate', 'description', 
                 'deposit_rule', 'deposit_included_methods', 'withdraw_rule', 
@@ -76,6 +77,11 @@ class AffiliateGroupPage extends Component
         } catch (\Exception $e) {
             $this->dispatch('swal', title: 'Error', icon: 'danger', text: 'Commission creation unsuccessful. An unexpected error occurred: ' . $e->getMessage());
         }
+    }
+
+    public function handleCloseModal()
+    {
+        $this->dispatch('close-modal');
     }
 
     public function networktype()
@@ -89,7 +95,8 @@ class AffiliateGroupPage extends Component
                 'network_domain' => $this->domain_link,
             ]);
             $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Network created successfully.');
-            $this->dispatch('close-modal2');
+            // $this->dispatch('close-modal2');
+        $this->handleCloseModal2();
             $this->reset(['network_type', 'domain_type', 'domain_link']);
         } catch (ValidationException $e) {
             return;
@@ -98,6 +105,11 @@ class AffiliateGroupPage extends Component
         }
     }
 
+    
+    public function handleCloseModal2()
+    {
+        $this->dispatch('close-modal2');
+    }
     public function render()
     {
         return view('livewire.affiliate.affiliate-group-page', [

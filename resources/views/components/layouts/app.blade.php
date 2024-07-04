@@ -77,28 +77,26 @@
           title: data.title || 'Alert',
           text: data.text || '',
           icon: data.icon || 'info',
-          confirm: 'OK',
+          confirmButtonText: 'OK',
   
       });
   });
-
+  
 Livewire.on('close-modal', () => 
 {
-  $('#modal-report').remove();
-  $('.modal-backdrop').remove();
-
+  $('#modal-report').hide();
+  $('.modal-backdrop').hide();
 }
 ); 
 
 Livewire.on('close-modal2', () => 
 {
-  $('#modal-report2').remove();
-  $('.modal-backdrop').remove();
-
+  $('#modal-report2').hide();
+  $('.modal-backdrop').hide();
 }
 ); 
+
 </script>
 
 </body>
-
 </html>

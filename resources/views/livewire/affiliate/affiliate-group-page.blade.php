@@ -2065,7 +2065,7 @@
                       <div class="mb-3">
                           <label class="form-label">Domain Link</label>
                           <input
-                                  type="text"
+                                  type="url"
                                 wire:model="domain_link"
                                   class="form-control"
                                    placeholder="http://name.com/" 

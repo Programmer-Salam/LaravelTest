@@ -2093,7 +2093,7 @@
           </div>
         </div>
         <div
-          class="modalmodal-blur  fade"
+          class="modal modal-blur  fade"
           id="modal-report"
           tabindex="-1"
           aria-hidden="true"

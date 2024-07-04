@@ -1875,6 +1875,8 @@
                 </div>
                 <br />
             <div class="col">
+              {{ $Affiliates->links () }}
+
               <div class="table-responsive">
                 <table class="table table-vcenter table-mobile-md card-table">
                   <thead>
@@ -1936,11 +1938,12 @@
                         <td colspan="10" class="notfound">No Record found !</td>
                     </tr>
                 @endforelse
-       
                   </tbody>
                 </table>
               </div>
+
                 </div> 
+
               </div>
             </div>
             <footer class="footer footer-transparent d-print-none">
@@ -2291,8 +2294,6 @@
     </div>
 
     @livewireScripts
-<<<<<<< HEAD
-=======
 
 <script>
     Livewire.on('swal', function(data) {
@@ -2305,5 +2306,5 @@
     });
 </script>
 
->>>>>>> d7887811a1d1842c07dd56b1b6e2df5e65b7c00c
+
 </div>

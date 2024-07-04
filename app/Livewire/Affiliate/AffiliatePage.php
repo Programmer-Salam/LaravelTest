@@ -8,9 +8,11 @@ use App\Models\Affiliate\Affiliate;
 use Illuminate\Support\Facades\Log;
 use App\Models\Affiliate\AffiliateNetworkType;
 use Illuminate\Validation\ValidationException;
+use Livewire\WithPagination;
 
 class AffiliatePage extends Component
 {
+    use WithPagination;
     public $validationErrors = [];
 
     public $players  = '';
@@ -86,7 +88,7 @@ public function handleCloseModal()
 public function render()
     {
         return view('livewire.affiliate.affiliate-page', [
-            'Affiliates' => Affiliate::latest()->get(),
+            'Affiliates' => Affiliate::paginate(1),
             'Users' => User::latest()->get(),
             'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
         ]);

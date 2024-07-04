@@ -12,7 +12,7 @@ class CreateAffiliatesTable extends Migration
             $table->id();
             $table->string('players');
             $table->string('company_id');
-            $table->string('user_id ');
+            $table->integer('user_id');
             $table->string('commission_type');
             $table->decimal('commission_rate', 8, 2);
             $table->string('currency');
@@ -21,7 +21,7 @@ class CreateAffiliatesTable extends Migration
             $table->text('note')->nullable();
             $table->string('affiliate_link');
 
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

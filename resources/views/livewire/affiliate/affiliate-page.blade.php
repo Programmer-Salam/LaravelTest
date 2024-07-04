@@ -2210,7 +2210,7 @@
                                                     <option value="STG">STG</option>
                                                     <option value="TRY">TRY</option>
                                                 </select>
-                                                @error('selected') <span class="text-danger">{{ $message }}</span> @enderror
+                                                @error('currency') <span class="text-danger">{{ $message }}</span> @enderror
                     
                                             </div>
                                         </div>
@@ -2292,10 +2292,22 @@
                     </form>
       
      </div>
-       
-    
-    
+
     </div>
 
     @livewireScripts
+<<<<<<< HEAD
+=======
+ 
+<script>
+    Livewire.on('swal', function(data) {
+        Swal.fire({
+            title: data.title || 'Alert',
+            text: data.text || '',
+            icon: data.icon || 'info',
+            confirmButtonText: 'OK',
+        });
+    });
+</script>
+>>>>>>> f367242ec471df35164f44a140d406980a59ec73
 </div>

@@ -2291,4 +2291,19 @@
     </div>
 
     @livewireScripts
+<<<<<<< HEAD
+=======
+
+<script>
+    Livewire.on('swal', function(data) {
+        Swal.fire({
+            title: data.title || 'Alert',
+            text: data.text || '',
+            icon: data.icon || 'info',
+            confirmButtonText: 'OK',
+        });
+    });
+</script>
+
+>>>>>>> d7887811a1d1842c07dd56b1b6e2df5e65b7c00c
 </div>

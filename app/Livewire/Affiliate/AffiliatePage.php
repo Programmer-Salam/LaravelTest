@@ -50,11 +50,12 @@ public function submit()
         $player_info = User::findOrFail($player_id);
 
         $network_link = $this->network_link;
-        $existing_affiliate_network = Affiliate::where('network_link', $network_link)->first(); // I think we have to validate that if the link is already used by the login user but we didn't have that for now
+        $existing_affiliate_network = Affiliate::where('network_link', $network_link)
+        ->where('players', $player_id)
+        ->first();
 
         if ($existing_affiliate_network) {
             $this->addError('network_link', 'This network link already exists.');
-            // $this->addError('network_link', 'This network link already exists for you!');
             return;
         }
 
@@ -77,6 +78,10 @@ public function submit()
     } catch (ValidationException $e) {
         return;
     } catch (\Exception $e) {
+        // Log::error('Affiliate creation failed', [
+        //     'error' => $e->getMessage(),
+        //     'trace' => $e->getTraceAsString(),
+        // ]);
         $this->dispatch('swal', title: 'Error', icon: 'error', text: 'Affiliate Creation Unsuccessful. An unexpected error occurred.');
     }
 }
@@ -89,7 +94,8 @@ public function handleCloseModal()
 public function render()
     {
         return view('livewire.affiliate.affiliate-page', [
-            'Affiliates' => Affiliate::paginate($this->perpage),
+            // = Affiliate::with('player')->paginate($this->perpage);
+            'Affiliates' => Affiliate::with('player')->paginate($this->perpage),
             'Users' => User::latest()->get(),
             'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
         ]);

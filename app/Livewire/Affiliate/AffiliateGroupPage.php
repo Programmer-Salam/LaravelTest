@@ -65,7 +65,7 @@ class AffiliateGroupPage extends Component
                 'deduction_included_methods' => $this->deduction_included_methods, 
             ]);
             $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Commission type created successfully.');
-            // $this->dispatch('close-modal');
+
         $this->handleCloseModal();
             $this->reset([
                 'type_name', 'minimum_rate', 'maximum_rate', 'description', 

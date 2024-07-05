@@ -1872,7 +1872,6 @@
                 </div>
                 <br />
             <div class="col">
-              {{ $Affiliates->links () }}
             
               <div class="row g-4 align-items-center">
                 <div class="col">
@@ -1893,68 +1892,74 @@
               </div>
          
               <div class="table-responsive">
-                <table class="table table-vcenter table-mobile-md card-table">
-                  <thead>
-                    @php
-                    $x = 1;
-                @endphp
-                    <tr>
-                      <th>S/N</th>
-                      <th>Date &amp; Time Details</th>            
-                      <th>Player Choosed</th>
-                      <th>Comission Type</th>
-                      <th>Comission Rate</th>
-                      <th>Currency</th>
-                      <th>Network Type</th>
-                      <th>Network Link</th>
-                      <th>Affiliate Link</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @forelse ($Affiliates as $Affliate)
-                    <tr>
-                      <td><?php echo $x++ ?></td>
-                      <td>{{ $Affliate->created_at }}</td>
-                      <td data-label="players">
-                        <div class="d-flex py-1 align-items-center">
-                          <div class="flex-fill">
-                            <div class="font-weight-medium">{{ $Affliate->players }}</div>
+                @php
+                $x = ($Affiliates->currentPage() - 1) * $Affiliates->perPage() + 1;
+              @endphp
+              <table class="table table-vcenter table-mobile-md card-table">
+                <thead>
+                  <tr>
+                    <th>S/N</th>
+                    <th>Date &amp; Time Details</th>            
+                    <th>Player Chosen</th>
+                    <th>Commission Type</th>
+                    <th>Commission Rate</th>
+                    <th>Currency</th>
+                    <th>Network Type</th>
+                    <th>Network Link</th>
+                    <th>Affiliate Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse ($Affiliates as $Affiliate)
+                  <tr>
+                    <td>{{ $x++ }}</td>
+                    <td>{{ $Affiliate->created_at }}</td>
+                    <td data-label="players">
+                      <div class="d-flex py-1 align-items-center">
+                        <div class="flex-fill">
+                          <div class="font-weight-medium">
+                            #{{ $Affiliate->player->user_tag ?? 'N/A' }}{{ $Affiliate->player->user_name ?? '' }}
                           </div>
                         </div>
-                      </td>
-                      <td data-label="comission_type">
-                        <div class="text-primary fw-bold">{{ $Affliate->commission_type }}</div>
-                      </td> 
-                      <td data-label="comission_rate">
-                        <div class="text-primary fw-bold">{{ $Affliate->commission_rate }}</div>
-                      </td>
-                      <td data-label="currency">
-                        <div>{{ $Affliate->currency }}</div>
-                      </td>
-      
-                    <td  data-label="network_type">
-                      <div class="text-primary fw-bold">
-                      {{ $Affliate->network_type }}
-                      </div>
+                      </div>  
                     </td>
-                    <td  data-label="network_link">
-                      <div class="text-success fw-bold">
-                      {{ $Affliate->network_link }}
-                      </div>
+                    <td data-label="commission_type">
+                      <div class="text-primary fw-bold">{{ $Affiliate->commission_type }}</div>
                     </td> 
-                    <td  data-label="network_link">
-                      <div class="text-success fw-bold">
-                      {{ $Affliate->affiliate_link }}
+                    <td data-label="commission_rate">
+                      <div class="text-primary fw-bold">{{ $Affiliate->commission_rate }}</div>
+                    </td>
+                    <td data-label="currency">
+                      <div>{{ $Affiliate->currency }}</div>
+                    </td>
+                    <td data-label="network_type">
+                      <div class="text-primary fw-bold">
+                        {{ $Affiliate->network_type }}
                       </div>
                     </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="10" class="notfound">No Record found !</td>
-                    </tr>
-                @endforelse
-                  </tbody>
-                </table>
+                    <td data-label="network_link">
+                      <div class="text-success fw-bold">
+                        {{ $Affiliate->network_link }}
+                      </div>
+                    </td>
+                    <td data-label="affiliate_link">
+                      <div class="text-success fw-bold">
+                        {{ $Affiliate->affiliate_link }}
+                      </div>
+                    </td>
+                  </tr>
+                  @empty
+                  <tr>
+                    <td colspan="10" class="notfound">No Record found!</td>
+                  </tr>
+                  @endforelse
+                </tbody>
+              </table>
+              <div style="margin-top:10px">
+                {{ $Affiliates->links() }}
+              </div>
+              
+
               </div>
 
                 </div> 
@@ -2219,7 +2224,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Currency</label>
                                                 <select wire:model="currency" class="form-select"   >
-                                                    <option value="" disabled  selected="">Choose</option>
+                                                     <option value="" disabled  selected="">Choose</option>
                                                     <option value="USD">USD</option>
                                                     <option value="EUR">EUR</option>
                                                     <option value="STG">STG</option>

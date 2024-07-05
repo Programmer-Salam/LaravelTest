@@ -88,7 +88,7 @@ public function handleCloseModal()
 public function render()
     {
         return view('livewire.affiliate.affiliate-page', [
-            'Affiliates' => Affiliate::paginate(1),
+            'Affiliates' => Affiliate::paginate(5),
             'Users' => User::latest()->get(),
             'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
         ]);

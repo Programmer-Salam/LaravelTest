@@ -1879,7 +1879,7 @@
                   <div class="col-auto ms-auto d-print-none">
                     <div class="d-flex">
                       <div class="me-2">
-                        <label for="">Per Page</label>
+                        <label for=""><b>Per Page</b></label>
                         <select class="form-select" wire:model.live="perpage">
                           <option value="5">5</option>
                           <option value="10">10</option>
@@ -2135,7 +2135,8 @@
                                                     <option value="" disabled selected="">Choose</option>
                                                     @foreach ($Users as $User)
                                      <option value="{{ $User->id }}">
-                                        {{ trim(implode(' ', [$User->first_name, $User->last_name, $User->middle_name])) }}
+                                      {{ $User->user_name }}
+                                    
                                     </option>
                                                     @endforeach 
                                                 </select>

@@ -71,10 +71,9 @@ public function submit()
             'affiliate_link' => $affiliate_network->network_domain . "/affiliate?btag=" . $randomNumber,
         ]);
         $this->reset();
-        // $this->dispatch('close-modal');
         $this->handleCloseModal();
         $this->dispatch('swal', title: 'Created', icon: 'success', text: 'Affiliate created successfully');
-        // $this->handleCloseModal();
+   
     } catch (ValidationException $e) {
         return;
     } catch (\Exception $e) {

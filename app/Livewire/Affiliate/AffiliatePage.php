@@ -13,6 +13,8 @@ use Livewire\WithPagination;
 class AffiliatePage extends Component
 {
     use WithPagination;
+
+    public $perpage = 5;
     public $validationErrors = [];
 
     public $players  = '';
@@ -88,7 +90,7 @@ public function handleCloseModal()
 public function render()
     {
         return view('livewire.affiliate.affiliate-page', [
-            'Affiliates' => Affiliate::paginate(1),
+            'Affiliates' => Affiliate::paginate($this->perpage),
             'Users' => User::latest()->get(),
             'AffiliateNetworkTypes' => AffiliateNetworkType::latest()->get()
         ]);

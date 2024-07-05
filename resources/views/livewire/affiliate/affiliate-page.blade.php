@@ -1,7 +1,4 @@
 <div>
-    {{-- The best athlete wants his opponent at his best. --}}
-    <div>
-        {{-- Nothing in the world is as soft and yielding as water. --}}
         <div class="page">
           <!-- Navbar -->
           <aside
@@ -1567,7 +1564,7 @@
                     <div class="page-pretitle">Overview</div>
                     <h2 class="page-title">Affiliate List</h2>
                   </div>
-
+                 
 
 
                   
@@ -1876,7 +1873,25 @@
                 <br />
             <div class="col">
               {{ $Affiliates->links () }}
-
+            
+              <div class="row g-4 align-items-center">
+                <div class="col">
+                  <div class="col-auto ms-auto d-print-none">
+                    <div class="d-flex">
+                      <div class="me-2">
+                        <label for="">Per Page</label>
+                        <select class="form-select" wire:model.live="perpage">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                        </select>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         
               <div class="table-responsive">
                 <table class="table table-vcenter table-mobile-md card-table">
                   <thead>
@@ -2291,7 +2306,6 @@
       
      </div>
 
-    </div>
 
     @livewireScripts
 

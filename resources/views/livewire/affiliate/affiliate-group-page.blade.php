@@ -1,6 +1,5 @@
 <div>
-    {{-- The best athlete wants his opponent at his best. --}}
-    <div>
+ 
         <div class="page">
           <!-- Navbar -->
           <aside
@@ -2101,7 +2100,7 @@
   </div>
 </div>
 
-</div>
+
 </div>
 @livewireScripts
 
